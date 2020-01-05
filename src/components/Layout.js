@@ -60,15 +60,15 @@ export default class Layout extends React.Component {
             crossorigin="anonymous"
           />
         </Helmet>
-        <ButtonSelectTheme onClick={this.handleChangeTheme}>
+        {/* <ButtonSelectTheme onClick={this.handleChangeTheme}>
           {this.state.isDarkTheme ? 'LIGHT' : 'DARK'}
           {this.state.isDarkTheme ? (
             <i className={`fas fa-toggle-on`} />
           ) : (
             <i className={`fas fa-toggle-off`} />
           )}
-        </ButtonSelectTheme>
-        <ThemeProvider theme={this.state.isDarkTheme ? darkTheme : lightTheme}>
+        </ButtonSelectTheme> */}
+        <ThemeProvider theme={true || this.state.isDarkTheme ? darkTheme : lightTheme}>
           <React.Fragment>
             <GlobalStyles />
             <LayoutWrapper>{this.props.children}</LayoutWrapper>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
-import styled from 'styled-components'
+import React, { useRef, useState } from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
+import styled from 'styled-components'
 
 const Container = styled.div`
   height: 200px;
@@ -68,7 +68,7 @@ const Shortened = ({ url })  => {
           <Url target="_blank" href={url}>{url}</Url>
           <CopyToClipboard text={url} onCopy={onCopy}>
             <Copy title='Copy to clipboard'>
-              <img width='20px' src='https://icongr.am/clarity/copy.svg'/>
+              <img width='20px' alt='Copy to clipboard' src='https://icongr.am/clarity/copy.svg'/>
               { copied && <CopiedTooltip>Copiado</CopiedTooltip> }
             </Copy>
           </CopyToClipboard>

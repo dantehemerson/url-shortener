@@ -8,9 +8,9 @@ import Input from '../components/Input'
 import Layout from '../components/Layout'
 import Shortened from '../components/Shortened'
 import { config } from '../config'
-import { isValidUrl } from '../utils'
+import { isValidUrl, generateFullURLCode } from '../utils'
 
-export const IndexPage = () => {
+export const IndexPage = ({ location }) => {
   const [ loading, setLoading ] = useState(false)
   const [ originalUrl, setOriginalUrl ] = useState('')
   const [ error, setError ] = useState('')
@@ -18,7 +18,7 @@ export const IndexPage = () => {
 
   const handleGenerate = () => {
     if(!isValidUrl(originalUrl)) {
-      setError('La url no es valida')
+      setError('Url is not valid')
       return
     }
     setLoading(true)
@@ -30,10 +30,11 @@ export const IndexPage = () => {
       },
     })
       .then(({ data }) => {
-        setGeneratedUrl(`${config.LAMBDA_ENDPOINT}/r/${data.urlCode}`)
+        const url = generateFullURLCode(location, data.urlCode)
+        setGeneratedUrl(url)
       })
       .catch(err => {
-        console.log(err)
+        setError('Unexpected error')
       })
       .finally(() => {
         setLoading(false)
@@ -81,6 +82,7 @@ background-size: cover;
 export const indexAbout = graphql`
   query IndexAbout {
     site {
+      host
       siteMetadata {
         title
       }
