@@ -61,10 +61,10 @@ export class IndexPage extends React.Component {
 
   handlerToggleLike = id => {
     axios({
-      url: `${this.lambdaEndpoint}/like`,
+      url: `${this.lambdaEndpoint}/create`,
       method: 'post',
       data: {
-        id,
+        originalUrl: 'https:dantecalderon.dev',
       },
     })
       .then(({ data }) => {
@@ -86,7 +86,7 @@ export class IndexPage extends React.Component {
           <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
             <h1 style={{ margin: 0 }}>URL Shortener</h1>
             <Input placeholder='Your URL here'/>
-            <Button>Generar</Button>
+            <Button onClick={this.handlerToggleLike}>Generar</Button>
           </div>
         </Container>
       </Layout>
