@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Input from '../components/Input'
 import Layout from '../components/Layout'
 import { getItems, parseLikes } from '../utils'
+import { config } from '../config'
 
 const Button = styled.button`
   background: #f9b51b;
@@ -26,25 +27,16 @@ const Button = styled.button`
 `
 
 export class IndexPage extends React.Component {
-  lambdaEndpoint = ''
-
   state = {
     loading: true,
-    items: [],
     likes: {},
     error: false,
-  }
-
-  componentDidMount() {
-    this.lambdaEndpoint = this.props.data.site.siteMetadata.lambdaEndpoint
-    this.setState({ items: getItems() })
-    this.fetchLikes()
   }
 
   fetchLikes = () => {
     this.setState({ loading: true, error: false })
     axios
-      .get(`${this.lambdaEndpoint}/get-likes`)
+      .get(`${config.LAMBDA_ENDPOINT}/get-likes`)
       .then(data => {
         this.setState({
           loading: false,
@@ -61,17 +53,13 @@ export class IndexPage extends React.Component {
 
   handlerToggleLike = id => {
     axios({
-      url: `${this.lambdaEndpoint}/create`,
+      url: `${config.LAMBDA_ENDPOINT}/create`,
       method: 'post',
       data: {
         originalUrl: 'https:dantecalderon.dev',
       },
     })
       .then(({ data }) => {
-        const liked = data
-        this.setState({
-          likes: { ...this.state.likes, [liked._id]: liked.likes },
-        })
       })
       .catch(err => {
         console.log(err)
@@ -79,7 +67,6 @@ export class IndexPage extends React.Component {
   }
 
   render() {
-    const { items, likes, loading, error } = this.state
     return (
       <Layout>
         <Container>
@@ -114,7 +101,6 @@ export const indexAbout = graphql`
     site {
       siteMetadata {
         title
-        lambdaEndpoint
       }
     }
   }
