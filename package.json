@@ -1,0 +1,51 @@
+{
+  "name": "gatsby-starter-default",
+  "private": true,
+  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "version": "1.0.2",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "dependencies": {
+    "axios": "0.19.0",
+    "babel-plugin-styled-components": "1.10.6",
+    "gatsby": "2.15.9",
+    "gatsby-image": "2.2.17",
+    "gatsby-plugin-manifest": "2.2.14",
+    "gatsby-plugin-offline": "3.0.3",
+    "gatsby-plugin-react-helmet": "3.1.6",
+    "gatsby-plugin-sharp": "2.2.20",
+    "gatsby-plugin-styled-components": "3.1.4",
+    "gatsby-source-filesystem": "2.1.21",
+    "gatsby-transformer-sharp": "2.2.13",
+    "mongoose": "5.6.13",
+    "netlify-lambda": "1.6.3",
+    "prop-types": "15.7.2",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-helmet": "5.2.1",
+    "styled-components": "4.3.2"
+  },
+  "devDependencies": {
+    "prettier": "1.18.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "lambda-serve": "netlify-lambda serve functions",
+    "lambda-build": "netlify-lambda build functions",
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write src/**/*.{js,jsx}",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
+}
