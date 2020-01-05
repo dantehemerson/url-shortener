@@ -44,11 +44,21 @@ exports.handler = async (event, context, callback) => {
     return
   }
 
-  // console.log(event)
-  console.log("Dante: exports.handler -> event", event)
   const ItemModel = conn.model(ShortenedUrlModelName)
 
-  let items = await ItemModel.find({}, { __v: false })
+  // Get the code, deleting the prepath
+  const urlCode = event.path.slice(22)
 
-  callback(null, createResponse(200, items))
+  const shortenedUrl = await ItemModel.findOneAndUpdate({ urlCode }, { $inc: { clicksCounter: 1 } },  { new: true })
+  if(!shortenedUrl) {
+    callback(null, createResponse(404, 'Shotened URL not found'))
+    return
+  }
+
+  callback(null, {
+    statusCode: 301,
+    headers: {
+      Location: shortenedUrl.originalUrl
+    }
+  })
 }
