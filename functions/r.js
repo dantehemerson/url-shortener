@@ -49,7 +49,18 @@ exports.handler = async (event, context, callback) => {
   // Get the code, deleting the prepath
   const urlCode = event.path.slice(22)
 
-  const shortenedUrl = await ItemModel.findOneAndUpdate({ urlCode }, { $inc: { clicksCounter: 1 } },  { new: true })
+  const shortenedUrl = await ItemModel.findOneAndUpdate({
+      urlCode
+    },
+    {
+      $inc: { clicksCounter: 1 },
+      $set: {
+        updatedAt: new Date().toISOString()
+      }
+    },
+    { new: true
+  })
+
   if(!shortenedUrl) {
     callback(null, createResponse(404, 'Shotened URL not found'))
     return

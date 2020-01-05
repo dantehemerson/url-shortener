@@ -12,10 +12,7 @@ export const ShortenedUrlSchema = new mongoose.Schema(
     },
     updatedAt: {
       type: Date,
-      default: Date.now,
-      set: () => {
-        return Date.now()
-      }
+      default: Date.now
     },
     clicksCounter: { type: Number, default: 0 }
   },
