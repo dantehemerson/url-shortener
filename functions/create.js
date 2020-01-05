@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const mongoose = require('mongoose')
+const shortid = require('shortid')
 const { ShortenedUrlModelName, ShortenedUrlSchema } = require('../functions_src/shortenedUrl.schema')
 
 const MONGO_URL = process.env.MONGO_URL
@@ -56,7 +57,6 @@ exports.handler = async (event, context, callback) => {
 
   const body = JSON.parse(event.body)
   const originalUrl = body.originalUrl
-  console.log("Dante: exports.handler -> originalUrl", originalUrl)
   if (!originalUrl) {
     callback(null, createResponse(400, 'Url is required'))
     return
@@ -65,18 +65,12 @@ exports.handler = async (event, context, callback) => {
   const ItemModel = conn.model(ShortenedUrlModelName)
 
 
-  let doc = null
-  // let doc = await ItemModel.create(
-  //   {
-  //     originalUrl
-  //   },
-  //   {
-  //     $inc: { likes: 1 },
-  //   },
-  //   {
-  //     new: true,
-  //   }
-  // )
+  let doc = await ItemModel.create(
+    {
+      originalUrl,
+      urlCode: shortid.generate()
+    }
+  )
 
   callback(null, createResponse(200, doc))
 }

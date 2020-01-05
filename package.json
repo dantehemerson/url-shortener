@@ -22,6 +22,7 @@
     "react": "16.9.0",
     "react-dom": "16.9.0",
     "react-helmet": "5.2.1",
+    "shortid": "^2.2.15",
     "styled-components": "4.3.2"
   },
   "devDependencies": {

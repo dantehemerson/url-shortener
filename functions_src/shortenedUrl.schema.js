@@ -4,16 +4,17 @@ export const ShortenedUrlModelName = 'ShortenedUrl'
 
 export const ShortenedUrlSchema = new mongoose.Schema(
   {
-    shortenedUrl: { type: String },
     originalUrl: { type: String, require: true },
+    urlCode: { type: String, require: true },
     createdAt: {
       type: Date,
       default: Date.now
     },
     updatedAt: {
       type: Date,
+      default: Date.now,
       set: () => {
-        return new Date()
+        return Date.now()
       }
     },
     clicksCounter: { type: Number, default: 0 }
