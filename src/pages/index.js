@@ -1,84 +1,52 @@
 import axios from 'axios'
 import { graphql } from 'gatsby'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Input from '../components/Input'
 import Layout from '../components/Layout'
 import { getItems, parseLikes } from '../utils'
 import { config } from '../config'
+import Button from '../components/Button'
+import Shortened from '../components/Shortened'
 
-const Button = styled.button`
-  background: #f9b51b;
-  &:hover {
-    background: #dea115;
-  }
-  transition: .4s;
-  color: white;
-  border: none;
-  border-radius: 2rem;
-  font-size: 14px;
-  padding: 10px 10px;
-  width: 220px;
-  cursor: pointer;
-  margin-bottom: 200px;
-  outline: none;
-  margin-top: 20px;
-  font-weight: 600;
-`
+export const IndexPage = () => {
+  const [ loading, setLoading ] = useState(false)
+  const [ originalUrl, setOriginalUrl ] = useState('')
+  const [ error, setError ] = useState(false)
+  const [ generatedUrl, setGeneratedUrl ] = useState('')
 
-export class IndexPage extends React.Component {
-  state = {
-    loading: true,
-    likes: {},
-    error: false,
-  }
-
-  fetchLikes = () => {
-    this.setState({ loading: true, error: false })
-    axios
-      .get(`${config.LAMBDA_ENDPOINT}/get-likes`)
-      .then(data => {
-        this.setState({
-          loading: false,
-          likes: parseLikes(data.data),
-        })
-      })
-      .catch(error => {
-        this.setState({
-          loading: false,
-          error: true,
-        })
-      })
-  }
-
-  handlerToggleLike = id => {
+  const handlerToggleLike = id => {
+    setLoading(true)
     axios({
       url: `${config.LAMBDA_ENDPOINT}/create`,
       method: 'post',
       data: {
-        originalUrl: 'https:dantecalderon.dev',
+        originalUrl
       },
     })
       .then(({ data }) => {
+        setGeneratedUrl(`${config.LAMBDA_ENDPOINT}/r/${data.urlCode}`)
+        console.log("Dante: IndexPage -> data", data)
+
+        setLoading(false)
       })
       .catch(err => {
         console.log(err)
       })
   }
 
-  render() {
-    return (
-      <Layout>
-        <Container>
-          <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
-            <h1 style={{ margin: 0 }}>URL Shortener</h1>
-            <Input placeholder='Your URL here'/>
-            <Button onClick={this.handlerToggleLike}>Generar</Button>
-          </div>
-        </Container>
-      </Layout>
-    )
-  }
+  return (
+    <Layout>
+      <Container>
+        <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
+          <h1 style={{ margin: 0 }}>URL Shortener</h1>
+          <Input placeholder='Your URL here' value={originalUrl} onChange={event => setOriginalUrl(event.target.value)}/>
+          <Button disabled={loading} onClick={handlerToggleLike}>Generar</Button>
+          <Shortened url={generatedUrl}/>
+        </div>
+      </Container>
+    </Layout>
+  )
 }
 
 const Container = styled.div`

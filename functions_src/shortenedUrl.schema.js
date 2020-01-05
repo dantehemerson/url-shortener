@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-export const ShortenedUrlModelName = 'ShortenedUrl'
+export const ShortenedUrlModelName = 'shortened-url'
 
 export const ShortenedUrlSchema = new mongoose.Schema(
   {
