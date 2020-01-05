@@ -2,20 +2,25 @@ import axios from 'axios'
 import { graphql } from 'gatsby'
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Button from '../components/Button'
+import ErrorMessage from '../components/ErrorMessage'
 import Input from '../components/Input'
 import Layout from '../components/Layout'
-import { getItems, parseLikes } from '../utils'
-import { config } from '../config'
-import Button from '../components/Button'
 import Shortened from '../components/Shortened'
+import { config } from '../config'
+import { isValidUrl } from '../utils'
 
 export const IndexPage = () => {
   const [ loading, setLoading ] = useState(false)
   const [ originalUrl, setOriginalUrl ] = useState('')
-  const [ error, setError ] = useState(false)
+  const [ error, setError ] = useState('')
   const [ generatedUrl, setGeneratedUrl ] = useState('')
 
-  const handlerToggleLike = id => {
+  const handleGenerate = () => {
+    if(!isValidUrl(originalUrl)) {
+      setError('La url no es valida')
+      return
+    }
     setLoading(true)
     axios({
       url: `${config.LAMBDA_ENDPOINT}/create`,
@@ -26,13 +31,19 @@ export const IndexPage = () => {
     })
       .then(({ data }) => {
         setGeneratedUrl(`${config.LAMBDA_ENDPOINT}/r/${data.urlCode}`)
-        console.log("Dante: IndexPage -> data", data)
-
-        setLoading(false)
       })
       .catch(err => {
         console.log(err)
       })
+      .finally(() => {
+        setLoading(false)
+      })
+  }
+
+  const onChangeUrl = (event) => {
+    setError('')
+    setGeneratedUrl('')
+    setOriginalUrl(event.target.value)
   }
 
   return (
@@ -40,8 +51,9 @@ export const IndexPage = () => {
       <Container>
         <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
           <h1 style={{ margin: 0 }}>URL Shortener</h1>
-          <Input placeholder='Your URL here' value={originalUrl} onChange={event => setOriginalUrl(event.target.value)}/>
-          <Button disabled={loading} onClick={handlerToggleLike}>Generar</Button>
+          <Input placeholder='Your URL here' value={originalUrl} onChange={onChangeUrl}/>
+          <Button disabled={loading} onClick={handleGenerate}>Generar</Button>
+          <ErrorMessage error={error}/>
           <Shortened url={generatedUrl}/>
         </div>
       </Container>
@@ -52,6 +64,7 @@ export const IndexPage = () => {
 const Container = styled.div`
   display: flex;
   justify-content: center;
+  align-items: flex-start;
   background-color: #ffffff;
   height: 100vh;
 
@@ -62,6 +75,7 @@ background-attachment: fixed;
 background-size: cover;
   box-sizing: border-box;
   padding: 10px;
+  padding-top: 20vh;
 `
 
 export const indexAbout = graphql`

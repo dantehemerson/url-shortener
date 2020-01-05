@@ -4,6 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 const Container = styled.div`
   height: 200px;
+  min-width: 100px;
 `
 
 const Url = styled.a`
