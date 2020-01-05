@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const mongoose = require('mongoose')
-const { ItemModelName, ItemSchema } = require('../functions_src/item-schema')
+const { ShortenedUrlModelName, ShortenedUrlSchema } = require('../functions_src/shortenedUrl.schema')
 
 const MONGO_URL = process.env.MONGO_URL
 
@@ -36,7 +36,7 @@ exports.handler = async (event, context, callback) => {
       bufferMaxEntries: 0, // and MongoDB driver buffering
       useNewUrlParser: true,
     })
-    conn.model(ItemModelName, ItemSchema)
+    conn.model(ShortenedUrlModelName, ShortenedUrlSchema)
   }
 
   if (event.httpMethod !== 'GET') {
@@ -44,7 +44,9 @@ exports.handler = async (event, context, callback) => {
     return
   }
 
-  const ItemModel = conn.model(ItemModelName)
+  // console.log(event)
+  console.log("Dante: exports.handler -> event", event)
+  const ItemModel = conn.model(ShortenedUrlModelName)
 
   let items = await ItemModel.find({}, { __v: false })
 
