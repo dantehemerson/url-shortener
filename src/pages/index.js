@@ -7,8 +7,9 @@ import ErrorMessage from '../components/ErrorMessage'
 import Input from '../components/Input'
 import Layout from '../components/Layout'
 import Shortened from '../components/Shortened'
-import { config } from '../config'
 import { isValidUrl, generateFullURLCode } from '../utils'
+import { config } from '../config'
+console.log("Dante: config", config)
 
 export const IndexPage = ({ location }) => {
   const [ loading, setLoading ] = useState(false)

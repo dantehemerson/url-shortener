@@ -7,7 +7,7 @@
   URL Shortener
 </h1>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f77a6574-68c3-4135-b416-39676494d777/deploy-status)](https://app.netlify.com/sites/git-utils/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/2d54495d-21ef-45a5-a4e4-1026bd4a9d27/deploy-status)](https://app.netlify.com/sites/url-shortener-app/deploys)
 
 Pretty logs for **git**
 
