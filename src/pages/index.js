@@ -9,7 +9,6 @@ import Layout from '../components/Layout'
 import Shortened from '../components/Shortened'
 import { isValidUrl, generateFullURLCode } from '../utils'
 import { config } from '../config'
-console.log("Dante: config", config)
 
 export const IndexPage = ({ location }) => {
   const [ loading, setLoading ] = useState(false)
@@ -18,6 +17,7 @@ export const IndexPage = ({ location }) => {
   const [ generatedUrl, setGeneratedUrl ] = useState('')
 
   const handleGenerate = () => {
+    if(loading) return
     if(!isValidUrl(originalUrl)) {
       setError('Url is not valid')
       return
@@ -52,8 +52,12 @@ export const IndexPage = ({ location }) => {
     <Layout>
       <Container>
         <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
-          <h1 style={{ margin: 0 }}>URL Shortener</h1>
-          <Input placeholder='Your URL here' value={originalUrl} onChange={onChangeUrl}/>
+          <h1 style={{ margin: 0 , fontSize: '50px'}}>🌐 URL Shortener</h1>
+          <Input placeholder='Your URL here' value={originalUrl} onKeyDown={e => {
+            if(e.key === 'Enter') {
+              handleGenerate()
+            }
+          }} onChange={onChangeUrl}/>
           <Button disabled={loading} onClick={handleGenerate}>Generar</Button>
           <ErrorMessage error={error}/>
           <Shortened url={generatedUrl}/>
