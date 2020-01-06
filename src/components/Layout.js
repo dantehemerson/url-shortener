@@ -48,7 +48,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Helmet defaultTitle="Git Utils">
+        <Helmet defaultTitle="URL Shortener by dantehemerson">
           <link
             href="https://fonts.googleapis.com/css?family=Play"
             rel="stylesheet"
