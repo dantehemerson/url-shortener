@@ -9,22 +9,22 @@ const LayoutWrapper = styled.div`
   color: ${props => (props ? props.theme.color : null)};
 `
 
-const ButtonSelectTheme = styled.button`
-  position: fixed;
-  top: 0;
-  right: 0;
-  background: gray;
-  border: 0;
-  box-shadow: none;
-  border-radius: 4px;
-  padding: 10px 0;
-  font-weight: 600;
-  cursor: pointer;
-  width: 60px;
-  &:focus {
-    outline: none;
-  }
-`
+// const ButtonSelectTheme = styled.button`
+//   position: fixed;
+//   top: 0;
+//   right: 0;
+//   background: gray;
+//   border: 0;
+//   box-shadow: none;
+//   border-radius: 4px;
+//   padding: 10px 0;
+//   font-weight: 600;
+//   cursor: pointer;
+//   width: 60px;
+//   &:focus {
+//     outline: none;
+//   }
+// `
 
 export default class Layout extends React.Component {
   state = {

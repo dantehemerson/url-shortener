@@ -52,7 +52,7 @@ export const IndexPage = ({ location }) => {
     <Layout>
       <Container>
         <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
-          <h1 style={{ margin: 0 , fontSize: '50px'}}>🌐 URL Shortener</h1>
+          <h1 style={{ margin: 0 , fontSize: '50px'}}><span aria-label='Logo' role='img'>🌐</span> URL Shortener</h1>
           <Input placeholder='Your URL here' value={originalUrl} onKeyDown={e => {
             if(e.key === 'Enter') {
               handleGenerate()

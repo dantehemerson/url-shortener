@@ -1,3 +1,3 @@
 export const config = {
-  LAMBDA_ENDPOINT: process.env.LAMBDA_ENDPOINT || 'https://url-shortener-app.netlify.com/.netlify/functions'
+  LAMBDA_ENDPOINT: process.env.GATSBY_LAMBDA_ENDPOINT || 'http://localhost:9000/.netlify/functions'
 }
