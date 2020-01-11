@@ -9,7 +9,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/2d54495d-21ef-45a5-a4e4-1026bd4a9d27/deploy-status)](https://app.netlify.com/sites/url-shortener-app/deploys)
 
-Pretty logs for **git**
+Simple url shortener build with lambda functions and Gatsby
 
 ## 🚀 Quick start
 
