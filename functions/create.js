@@ -8,12 +8,12 @@ let conn = null
 exports.handler = async (event, context, callback) => {
   context.callbackWaitsForEmptyEventLoop = false
 
-   conn = conn || await getMongoConnection()
-
   if (event.httpMethod === 'OPTIONS') {
     callback(null, createResponse(200, 'sucks'))
     return
   }
+
+  conn = conn || await getMongoConnection()
 
   if (event.httpMethod !== 'POST') {
     callback(null, createResponse(400, 'Only POST methods are allowed'))
