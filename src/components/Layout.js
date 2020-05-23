@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { ThemeProvider } from 'styled-components'
 import { GlobalStyles, darkTheme, lightTheme } from '../global-styles'
 import background from '../assets/background.svg'
+import Copy from './Copy'
 
 const LayoutWrapper = styled.div`
   background: ${props => (props ? props.theme.background : null)};
@@ -76,7 +77,8 @@ export default class Layout extends React.Component {
               <Container>
               {this.props.children}
               </Container>
-              </LayoutWrapper>
+            </LayoutWrapper>
+            <Copy/>
           </React.Fragment>
         </ThemeProvider>
       </React.Fragment>
