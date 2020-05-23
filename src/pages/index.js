@@ -14,6 +14,7 @@ export const IndexPage = ({ location }) => {
   const [ originalUrl, setOriginalUrl ] = useState('')
   const [ error, setError ] = useState('')
   const [ generatedUrl, setGeneratedUrl ] = useState('')
+  const [generatedUrlCode, setGeneratedUrlCode] = useState('')
 
   const handleGenerate = () => {
     if(loading) return
@@ -32,6 +33,7 @@ export const IndexPage = ({ location }) => {
       .then(({ data }) => {
         const url = generateFullURLCode(location, data.urlCode)
         setGeneratedUrl(url)
+        setGeneratedUrlCode(data.urlCode)
       })
       .catch(err => {
         setError('Unexpected error')
@@ -57,7 +59,7 @@ export const IndexPage = ({ location }) => {
         }} onChange={onChangeUrl}/>
         <ErrorMessage error={error}/>
         <Button disabled={loading} onClick={handleGenerate}>Shorten</Button>
-        <Shortened url={generatedUrl}/>
+        <Shortened url={generatedUrl} urlCode={generatedUrlCode}/>
       </div>
     </Layout>
   )

@@ -14,6 +14,14 @@ const Container = styled.div`
     font-size: 19px;
     color: #465266;
   }
+  .track_url {
+    text-align: center;
+    font-size: 16px;
+    color: #465266;
+    a {
+      color: #01a7cb;
+    }
+  }
 `
 
 const Url = styled.a`
@@ -62,7 +70,7 @@ const CopiedTooltip = styled.p`
     box-shadow: 0 0 4px #00000047;
 `
 
-const Shortened = ({ url })  => {
+const Shortened = ({ url, urlCode })  => {
   const [copied, setCopied] = useState(false)
   const myTimeout = useRef(null)
 
@@ -80,7 +88,7 @@ const Shortened = ({ url })  => {
     <Container>
       {url &&
       <React.Fragment>
-          <p className='title_result'>Your shortened url is:</p>
+          <p className='title_result'>Your shortened URL is:</p>
           <Result>
             <Url target="_blank" href={url}>{url}</Url>
             <CopyToClipboard text={url} onCopy={onCopy}>
@@ -90,6 +98,7 @@ const Shortened = ({ url })  => {
               </Copy>
             </CopyToClipboard>
           </Result>
+          <p className='track_url'>You can track total clicks in your URL <a href={`/clicks/of?url=${urlCode}`}  target="_blank">here</a></p>
         </React.Fragment>
       }
     </Container>
