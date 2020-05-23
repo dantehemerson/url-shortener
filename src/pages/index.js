@@ -49,14 +49,14 @@ export const IndexPage = ({ location }) => {
 
   return (
     <Layout>
-      <div style={{ justifyContent: 'center', maxWidth: '450px', width: '100%', padding: '10px', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
+      <div style={{ justifyContent: 'center', maxWidth: '560px', width: '100%', padding: '10px', alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
         <Input placeholder='Enter the link here' value={originalUrl} onKeyDown={e => {
           if(e.key === 'Enter') {
             handleGenerate()
           }
         }} onChange={onChangeUrl}/>
         <ErrorMessage error={error}/>
-        <Button disabled={loading} onClick={handleGenerate}>Generar</Button>
+        <Button disabled={loading} onClick={handleGenerate}>Shorten</Button>
         <Shortened url={generatedUrl}/>
       </div>
     </Layout>

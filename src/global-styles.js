@@ -32,9 +32,11 @@ export const GlobalStyles = createGlobalStyle`
     text-rendering: geometricPrecision;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-family: 'Play', sans-serif;
+    font-family: Play, sans-serif;
   }
-
+  h1, h2, h3, p, a {
+    font-family: Play;
+  }
   * {
     box-sizing: border-box;
   }

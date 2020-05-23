@@ -5,24 +5,40 @@ import styled from 'styled-components'
 const Container = styled.div`
   height: 200px;
   min-width: 100px;
+  width: 100%;
+  padding: 0 10px;
+  margin-top: 30px;
+  .title_result {
+    text-align: center;
+    font-weight: 700;
+    font-size: 19px;
+    color: #465266;
+  }
 `
 
 const Url = styled.a`
-  color: #b72b2b;
-  padding: 8px 10px;
+  color: #01a7cb;
+  width: 100%;
+  padding: 5px 10px 5px 20px;
 `
 
 const Copy = styled.button`
   border: none;
-  background: white;
+  background: #02a7cb;
+  color: white;
+  display: flex;
   &:hover {
-    background: #efefef;
+    background: #0498b8;
   }
-  border-left: 1px solid #f5f5f5;
   cursor: pointer;
   outline: none;
-  padding: 10px;
+  padding: 4px 20px;
+  border-radius: 0  30px 30px 0;
   position: relative;
+  > p {
+    font-family: Play;
+    font-weight: 700;
+  }
 `
 
 const Result = styled.div`
@@ -30,20 +46,19 @@ const Result = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 4px;
-  border: 1px solid #fefefe;
-  box-shadow: 0 0 4px #00000059;
+  border-radius: 30px;
+  box-shadow: 0px 2px 4px 0px #14141454;
 `
 
 const CopiedTooltip = styled.p`
     position: absolute;
-    background: #252424;
+    background: #465266;
     color: white;
-    top: 40px;
+    top: 44px;
     margin: 0;
-    left: -15px;
-    padding: 5px 9px;
-    border-radius: 4px;
+    left: 0px;
+    padding: 5px 14px;
+    border-radius: 30px;
     box-shadow: 0 0 4px #00000047;
 `
 
@@ -58,21 +73,24 @@ const Shortened = ({ url })  => {
     }
     myTimeout.current = setTimeout(() => {
       setCopied(false)
-    }, 2000)
+    }, 2400)
   }
 
   return (
     <Container>
       {url &&
-        <Result>
-          <Url target="_blank" href={url}>{url}</Url>
-          <CopyToClipboard text={url} onCopy={onCopy}>
-            <Copy title='Copy to clipboard'>
-              <img width='20px' alt='Copy to clipboard' src='https://icongr.am/clarity/copy.svg'/>
-              { copied && <CopiedTooltip>Copiado</CopiedTooltip> }
-            </Copy>
-          </CopyToClipboard>
-        </Result>
+      <React.Fragment>
+          <p className='title_result'>Your shortened url is:</p>
+          <Result>
+            <Url target="_blank" href={url}>{url}</Url>
+            <CopyToClipboard text={url} onCopy={onCopy}>
+              <Copy title='Copy to clipboard'>
+                <p>Copy</p>
+                { copied && <CopiedTooltip>Copied</CopiedTooltip> }
+              </Copy>
+            </CopyToClipboard>
+          </Result>
+        </React.Fragment>
       }
     </Container>
   )
