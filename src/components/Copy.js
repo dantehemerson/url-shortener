@@ -14,6 +14,7 @@ const CopyContainer = styled.div`
   left: 0;
   bottom: 10px;
   width: 100%;
+  color: #465266;
   text-align: center;
   position: fixed;
 `

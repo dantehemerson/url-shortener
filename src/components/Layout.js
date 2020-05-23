@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components'
 import { GlobalStyles, darkTheme, lightTheme } from '../global-styles'
 import background from '../assets/background.svg'
 import Copy from './Copy'
+import Title from './Title'
 
 const LayoutWrapper = styled.div`
   background: ${props => (props ? props.theme.background : null)};
@@ -52,7 +53,7 @@ export default class Layout extends React.Component {
       <React.Fragment>
         <Helmet defaultTitle="URL Shortener by dantehemerson">
           <link
-            href="https://fonts.googleapis.com/css?family=Play"
+            href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap"
             rel="stylesheet"
           />
           <link
@@ -75,10 +76,13 @@ export default class Layout extends React.Component {
             <GlobalStyles />
             <LayoutWrapper>
               <Container>
-              {this.props.children}
+                <React.Fragment>
+                  <Title/>
+                  {this.props.children}
+                  <Copy/>
+                </React.Fragment>
               </Container>
             </LayoutWrapper>
-            <Copy/>
           </React.Fragment>
         </ThemeProvider>
       </React.Fragment>
@@ -88,14 +92,13 @@ export default class Layout extends React.Component {
 
 const Container = styled.div`
   display: flex;
+  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  background-color: #ffffff;
   height: 100vh;
   background-image: url(${background});
   background-size: cover;
   background-repeat: no-repeat;
   box-sizing: border-box;
   padding: 10px;
-  padding-top: 20vh;
 `

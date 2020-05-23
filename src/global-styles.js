@@ -17,7 +17,6 @@ export const media = Object.keys(sizes).reduce((accumulator, label) => {
 }, {})
 
 export const darkTheme = {
-  background: '#2c3240',
   color: 'white',
 }
 
@@ -34,5 +33,9 @@ export const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-family: 'Play', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 `

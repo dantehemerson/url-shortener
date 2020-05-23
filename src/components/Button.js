@@ -1,9 +1,10 @@
 import styled from 'styled-components'
 
 const Button = styled.button`
-  background: #f9b51b;
+  background: #01a7cb;
+  box-shadow: 0px 2px 4px 0px #14141454;
   &:hover {
-    background: #dea115;
+    background: #108da8;
   }
   &:disabled {
     opacity: 0.7;
@@ -12,13 +13,14 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 2rem;
-  font-size: 14px;
+  font-family: Play;
+  font-size: 18px;
   padding: 10px 10px;
   width: 220px;
   cursor: pointer;
   margin-bottom: 10px;
+  margin-top: 6px;
   outline: none;
-  margin-top: 20px;
   font-weight: 600;
 `
 
