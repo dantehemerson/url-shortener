@@ -3,7 +3,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import styled from 'styled-components'
 
 const Container = styled.div`
-  height: 200px;
   min-width: 100px;
   width: 100%;
   padding: 0 10px;
@@ -70,7 +69,7 @@ const CopiedTooltip = styled.p`
     box-shadow: 0 0 4px #00000047;
 `
 
-const Shortened = ({ url, urlCode })  => {
+const Shortened = ({ title='Your shortened URL is:', url, urlCode })  => {
   const [copied, setCopied] = useState(false)
   const myTimeout = useRef(null)
 
@@ -88,7 +87,7 @@ const Shortened = ({ url, urlCode })  => {
     <Container>
       {url &&
       <React.Fragment>
-          <p className='title_result'>Your shortened URL is:</p>
+          <p className='title_result'>{title}</p>
           <Result>
             <Url target="_blank" href={url}>{url}</Url>
             <CopyToClipboard text={url} onCopy={onCopy}>
@@ -98,7 +97,9 @@ const Shortened = ({ url, urlCode })  => {
               </Copy>
             </CopyToClipboard>
           </Result>
-          <p className='track_url'>You can track total clicks in your URL <a href={`/clicks/of?url=${urlCode}`}  target="_blank">here</a></p>
+          {
+            urlCode && <p className='track_url'>You can track total clicks in your URL <a href={`/clicks/of?url=${urlCode}`}  target="_blank">here</a></p>
+          }
         </React.Fragment>
       }
     </Container>

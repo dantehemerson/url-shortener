@@ -7,6 +7,9 @@ import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Layout from '../../components/Layout'
 import { config } from '../../config'
+import ErrorMessage from '../../components/ErrorMessage'
+import { generateFullURLCode } from '../../utils'
+import Shortened from '../../components/Shortened'
 
 const Clicks = ({ location }) => {
   const [error, setError] = useState('')
@@ -55,18 +58,17 @@ const Clicks = ({ location }) => {
       {
         error ?
         <React.Fragment>
-        <p>Invalid URL to track</p>
+        <ErrorMessage error={'Invalid URL to track'}/>
         <Button onClick={handleTryAnother}>Try another</Button>
         </React.Fragment> :
         shortened ?
         <React.Fragment>
-          <h2>Total URL Clicks for: </h2>
-          <h3><a href={shortened.originalUrl}>{shortened.originalUrl}</a></h3>
-          <h1>{shortened.clicksCounter}</h1>
-          <Button onClick={handleTryAnother}>Try another</Button>
+          <Shortened title='Total URL Clicks for:' url={generateFullURLCode(location, shortened.urlCode)}/>
+          <h1 className='total_clicks'>{shortened.clicksCounter}</h1>
+          <Button onClick={handleTryAnother}>Track another URL</Button>
         </React.Fragment>:
         <React.Fragment>
-          <Input value={trackUrl} onChange={e => setTrackUrl(e.target.value)}/>
+          <Input placeholder='Put your URL to track here' value={trackUrl} onChange={e => setTrackUrl(e.target.value)}/>
           <Button onClick={handleTrack}>Track</Button>
         </React.Fragment>
       }
@@ -79,6 +81,12 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  .total_clicks {
+    font-size: 90px;
+    line-height: 0;
+    color: #465266;
+  }
 `
 
 
